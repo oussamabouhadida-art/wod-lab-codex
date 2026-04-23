@@ -1,8 +1,10 @@
 import { createAdminClient } from "@/lib/supabase/admin";
 import { WodForm } from "@/components/admin/WodForm";
+import { requireAdmin } from "@/lib/auth.admin";
 
 export default async function EditWodPage({ params }: { params: Promise<{ locale: string; id: string }> }) {
   const { locale, id } = await params;
+  await requireAdmin(locale);
 
   const supabase = createAdminClient();
   const { data: wod } = await supabase.from("wods").select("*").eq("id", id).single();

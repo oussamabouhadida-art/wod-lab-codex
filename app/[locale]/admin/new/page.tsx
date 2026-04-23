@@ -1,7 +1,9 @@
 import { WodForm } from "@/components/admin/WodForm";
+import { requireAdmin } from "@/lib/auth.admin";
 
 export default async function NewWodPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  await requireAdmin(locale);
 
   return (
     <section className="mx-auto max-w-4xl px-4 py-10 sm:px-6 lg:px-8">
