@@ -1,0 +1,29 @@
+{
+  "nav": { "wods": "WoDs", "about": "A propos", "admin": "Admin" },
+  "hero": { "tagline": "Forge tes limites. Un WoD a la fois.", "cta": "Explorer les WoDs" },
+  "tabs": {
+    "all": "Tous les WoDs", "for_time": "For Time", "amrap": "AMRAP",
+    "emom": "EMOM", "chipper": "Chipper", "ladder": "Ladder", "benchmark_hero": "Benchmark"
+  },
+  "wod": {
+    "type": "Type", "objective": "Objectif", "components": "Composants", "tags": "Tags",
+    "copy": "Copier le WoD", "copied": "WoD copie. C est parti",
+    "share_whatsapp": "Partager sur WhatsApp", "share_instagram": "Partager sur Instagram",
+    "instagram_tip": "Copie le WoD et colle-le dans la legende"
+  },
+  "kpi": {
+    "duration": "Duree", "avg_hr": "FC Moy", "max_hr": "FC Max",
+    "calories": "Calories", "training_effect": "Effet d entrainement",
+    "intensity": "Intensite", "recovery": "Recuperation", "load": "Charge"
+  },
+  "filters": {
+    "type": "Type de WoD", "component": "Mouvement", "objective": "Objectif",
+    "tag": "Tag", "reset": "Reinitialiser", "results": "{{count}} WoDs affiches"
+  },
+  "admin": {
+    "login_title": "Entrer dans le Lab", "login_placeholder": "Cle admin", "login_cta": "Entrer",
+    "new_wod": "Nouveau WoD", "save_draft": "Sauver en brouillon", "publish": "Publier",
+    "tab_content": "Contenu", "tab_classification": "Classification",
+    "tab_images": "Images", "tab_performance": "Performance", "tab_publish": "Publication"
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "nav": { "wods": "WoDs", "about": "Acerca de", "admin": "Admin" },
+  "hero": { "tagline": "Forja tus limites. Un WoD a la vez.", "cta": "Explorar WoDs" },
+  "tabs": {
+    "all": "Todos los WoDs", "for_time": "For Time", "amrap": "AMRAP",
+    "emom": "EMOM", "chipper": "Chipper", "ladder": "Ladder", "benchmark_hero": "Benchmark"
+  },
+  "wod": {
+    "type": "Tipo", "objective": "Objetivo", "components": "Componentes", "tags": "Etiquetas",
+    "copy": "Copiar WoD", "copied": "WoD copiado. A romperla",
+    "share_whatsapp": "Compartir por WhatsApp", "share_instagram": "Compartir por Instagram",
+    "instagram_tip": "Copia el WoD y pegalo en tu caption"
+  },
+  "kpi": {
+    "duration": "Duracion", "avg_hr": "FC Prom", "max_hr": "FC Max",
+    "calories": "Calorias", "training_effect": "Efecto de entrenamiento",
+    "intensity": "Intensidad", "recovery": "Recuperacion", "load": "Carga"
+  },
+  "filters": {
+    "type": "Tipo de WoD", "component": "Movimiento", "objective": "Objetivo",
+    "tag": "Tag", "reset": "Reiniciar filtros", "results": "Mostrando {{count}} WoDs"
+  },
+  "admin": {
+    "login_title": "Entrar al Lab", "login_placeholder": "Clave admin", "login_cta": "Entrar",
+    "new_wod": "Nuevo WoD", "save_draft": "Guardar borrador", "publish": "Publicar",
+    "tab_content": "Contenido", "tab_classification": "Clasificacion",
+    "tab_images": "Imagenes", "tab_performance": "Rendimiento", "tab_publish": "Publicacion"
+  }
+}
