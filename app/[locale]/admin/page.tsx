@@ -1,9 +1,11 @@
 import { Link } from "@/i18n/navigation";
 import { fetchAllWods } from "@/lib/actions/wod.actions";
 import { Button } from "@/components/ui/Button";
+import { requireAdmin } from "@/lib/auth.admin";
 
 export default async function AdminPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
+  await requireAdmin(locale);
   const wods = await fetchAllWods();
 
   return (
