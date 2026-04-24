@@ -5,6 +5,17 @@ import { componentOptions, objectiveOptions, wodTypeOptions } from "@/lib/utils/
 import { createAdminClient, hasSupabaseAdminEnv } from "@/lib/supabase/admin";
 import { createPublicClient, hasSupabasePublicEnv } from "@/lib/supabase/public";
 
+function extractTagNames(rows: { tags?: unknown }[]) {
+  return rows
+    .flatMap((row) => {
+      const value = row.tags;
+      if (Array.isArray(value)) return value;
+      return value ? [value] : [];
+    })
+    .map((entry) => (entry as { name?: string }).name)
+    .filter(Boolean);
+}
+
 function unique<T>(arr: T[]) {
   return [...new Set(arr)];
 }
@@ -47,9 +58,7 @@ export async function fetchDrawerData(wodId: string) {
     images: imagesRes.data ?? [],
     kpi: kpiRes.data,
     components: (componentsRes.data ?? []).map((c) => c.component),
-    tags: (tagsRes.data ?? [])
-      .flatMap((t) => ((t.tags as unknown as { name?: string }[] | null) ?? []).map((entry) => entry.name))
-      .filter(Boolean),
+    tags: extractTagNames(tagsRes.data ?? []),
   };
 }
 
