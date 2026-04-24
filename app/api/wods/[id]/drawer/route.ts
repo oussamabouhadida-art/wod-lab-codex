@@ -1,6 +1,17 @@
 import { NextResponse } from "next/server";
 import { createPublicClient, hasSupabasePublicEnv } from "@/lib/supabase/public";
 
+function extractTagNames(rows: { tags?: unknown }[]) {
+  return rows
+    .flatMap((row) => {
+      const value = row.tags;
+      if (Array.isArray(value)) return value;
+      return value ? [value] : [];
+    })
+    .map((entry) => (entry as { name?: string }).name)
+    .filter(Boolean);
+}
+
 export async function GET(_: Request, { params }: { params: Promise<{ id: string }> }) {
   if (!hasSupabasePublicEnv()) {
     return NextResponse.json({ images: [], kpi: null, components: [], tags: [] });
@@ -20,8 +31,6 @@ export async function GET(_: Request, { params }: { params: Promise<{ id: string
     images: images.data ?? [],
     kpi: kpi.data ?? null,
     components: (components.data ?? []).map((c) => c.component),
-    tags: (tags.data ?? [])
-      .flatMap((t) => ((t.tags as unknown as { name?: string }[] | null) ?? []).map((entry) => entry.name))
-      .filter(Boolean),
+    tags: extractTagNames(tags.data ?? []),
   });
 }
