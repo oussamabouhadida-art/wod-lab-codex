@@ -1,13 +1,13 @@
 import { NextResponse } from "next/server";
-import { createAdminClient, hasSupabaseAdminEnv } from "@/lib/supabase/admin";
+import { createPublicClient, hasSupabasePublicEnv } from "@/lib/supabase/public";
 
 export async function GET(_: Request, { params }: { params: Promise<{ id: string }> }) {
-  if (!hasSupabaseAdminEnv()) {
+  if (!hasSupabasePublicEnv()) {
     return NextResponse.json({ images: [], kpi: null, components: [], tags: [] });
   }
 
   const { id } = await params;
-  const supabase = createAdminClient();
+  const supabase = createPublicClient();
 
   const [images, kpi, components, tags] = await Promise.all([
     supabase.from("wod_images").select("*").eq("wod_id", id).order("sort_order", { ascending: true }),

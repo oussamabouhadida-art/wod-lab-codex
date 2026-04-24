@@ -3,14 +3,15 @@
 import { revalidatePath } from "next/cache";
 import { componentOptions, objectiveOptions, wodTypeOptions } from "@/lib/utils/wod-types";
 import { createAdminClient, hasSupabaseAdminEnv } from "@/lib/supabase/admin";
+import { createPublicClient, hasSupabasePublicEnv } from "@/lib/supabase/public";
 
 function unique<T>(arr: T[]) {
   return [...new Set(arr)];
 }
 
 export async function fetchPublishedWods() {
-  if (!hasSupabaseAdminEnv()) return [];
-  const supabase = createAdminClient();
+  if (!hasSupabasePublicEnv()) return [];
+  const supabase = createPublicClient();
   const { data, error } = await supabase
     .from("wods")
     .select("*")
@@ -30,8 +31,8 @@ export async function fetchAllWods() {
 }
 
 export async function fetchDrawerData(wodId: string) {
-  if (!hasSupabaseAdminEnv()) return { images: [], kpi: null, components: [], tags: [] };
-  const supabase = createAdminClient();
+  if (!hasSupabasePublicEnv()) return { images: [], kpi: null, components: [], tags: [] };
+  const supabase = createPublicClient();
   const [imagesRes, kpiRes, componentsRes, tagsRes] = await Promise.all([
     supabase.from("wod_images").select("*").eq("wod_id", wodId).order("sort_order", { ascending: true }),
     supabase.from("wod_kpis").select("*").eq("wod_id", wodId).maybeSingle(),
