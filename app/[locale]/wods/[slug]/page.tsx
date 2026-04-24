@@ -1,13 +1,11 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { createAdminClient, hasSupabaseAdminEnv } from "@/lib/supabase/admin";
+import { createPublicClient, hasSupabasePublicEnv } from "@/lib/supabase/public";
 import { WodTypeBadge } from "@/components/wod/WodTypeBadge";
 
-export const dynamic = "force-dynamic";
-
 export async function generateStaticParams() {
-  if (!hasSupabaseAdminEnv()) return [];
-  const supabase = createAdminClient();
+  if (!hasSupabasePublicEnv()) return [];
+  const supabase = createPublicClient();
   const { data } = await supabase.from("wods").select("slug").eq("is_published", true);
   const slugs = (data ?? []).map((d) => d.slug);
 
@@ -15,9 +13,9 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
-  if (!hasSupabaseAdminEnv()) return {};
+  if (!hasSupabasePublicEnv()) return {};
   const { locale, slug } = await params;
-  const supabase = createAdminClient();
+  const supabase = createPublicClient();
   const { data: wod } = await supabase.from("wods").select("*").eq("slug", slug).eq("is_published", true).single();
   if (!wod) return {};
 
@@ -37,7 +35,9 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 export default async function WodDetailPage({ params }: { params: Promise<{ locale: string; slug: string }> }) {
   const { locale, slug } = await params;
 
-  const supabase = createAdminClient();
+  if (!hasSupabasePublicEnv()) notFound();
+
+  const supabase = createPublicClient();
   const { data: wod } = await supabase.from("wods").select("*").eq("slug", slug).eq("is_published", true).single();
 
   if (!wod) notFound();
