@@ -13,6 +13,7 @@ export async function Navbar({ locale }: { locale: string }) {
         </Link>
         <nav className="flex items-center gap-6 text-sm text-body">
           <Link href="/wods" locale={locale} className="hover:text-heading">{t("wods")}</Link>
+          <Link href="/about" locale={locale} className="hover:text-heading">{t("about")}</Link>
           <Link href="/admin" locale={locale} className="hover:text-heading">{t("admin")}</Link>
           <LanguageToggle />
         </nav>
